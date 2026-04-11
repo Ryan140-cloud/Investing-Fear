@@ -1,12 +1,10 @@
-# RiskWise – Invest Without Fear
+# Investing-Fear – Invest Without Fear
 
 ## Overview
 
-RiskWise is an AI-powered investment simulation platform designed to help beginners overcome the fear of investing. It allows users to simulate potential outcomes before investing real money, understand risks clearly, and make confident financial decisions.
+Investing-Fear is an AI-powered investment simulation platform designed to help beginners overcome the fear of investing. It allows users to simulate possible outcomes before investing real money, understand risks clearly, and make confident financial decisions.
 
-The application provides tools such as risk simulation, AI-based portfolio explanation, and a loss probability meter to make investing simple and transparent.
-
-The system follows a full-stack architecture with a modern frontend, backend logic for simulations, and AI-based explanation modules.
+The platform focuses on simplifying complex financial concepts using simulation, visualization, and AI-based explanations.
 
 ---
 
@@ -21,9 +19,9 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 ### Frontend Architecture
 
 * **Framework**: React.js with JavaScript/TypeScript
-* **Styling**: Tailwind CSS (modern fintech UI)
+* **Styling**: Tailwind CSS
 * **Charts**: Recharts (for risk visualization)
-* **Animations**: Framer Motion (smooth UI interactions)
+* **Animations**: Framer Motion
 * **Build Tool**: Vite
 
 ---
@@ -39,32 +37,32 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 ### Data Layer
 
 * **Data Source**: Mock data / Yahoo Finance API
-* **Storage**: Optional PostgreSQL / in-memory storage
-* **Purpose**: Used for simulation and risk calculations
+* **Storage**: In-memory storage / PostgreSQL (optional)
+* **Purpose**: Used for simulation and risk estimation
 
 ---
 
 ### Shared Logic
 
 * Risk calculation functions
-* Probability estimation logic
+* Probability estimation algorithms
 * AI explanation templates
 
 ---
 
 ## Key Design Decisions
 
-1. **Simulation First Approach**
-   Users can see possible outcomes before investing real money
+1. **Simulation-First Approach**
+   Users can see potential outcomes before investing real money
 
 2. **Explainable AI**
-   AI explains investment risk in simple, human-readable language
+   Provides simple explanations instead of complex financial jargon
 
-3. **Beginner-Friendly UI**
-   Designed specifically for Gen-Z and new investors
+3. **User-Centric Design**
+   Designed specifically for beginners and Gen-Z investors
 
-4. **Modular Architecture**
-   Easy to scale and integrate with real trading platforms
+4. **Scalable Architecture**
+   Can be extended to real trading platforms
 
 ---
 
@@ -73,19 +71,19 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 ### 1. Risk Simulation Sandbox
 
 * Simulates investment outcomes
-* Shows best-case, worst-case, and average returns
+* Displays best-case, worst-case, and average returns
 
 ### 2. AI-Based Portfolio Explainer
 
 * Explains risk level (low / medium / high)
-* Provides simple reasoning for portfolio behavior
+* Provides clear reasoning behind investment behavior
 
 ### 3. Loss Probability Meter
 
-* Displays chances of loss vs profit
-* Uses visual indicators like charts and gauges
+* Shows probability of loss vs profit
+* Uses visual indicators like graphs and meters
 
-### 4. Try Before You Invest Mode (Optional)
+### 4. Try Before You Invest (Optional)
 
 * Demo portfolio tracking
 * Simulated real-time results
@@ -97,7 +95,7 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 ### Frontend
 
 * React.js
-* Tailwind CSS
+* CSS
 * Recharts
 
 ### Backend
@@ -119,7 +117,7 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 ### Frontend Libraries
 
 * react
-* tailwindcss
+* css
 * recharts
 * framer-motion
 
@@ -132,7 +130,7 @@ Preferred communication style: Simple, beginner-friendly financial explanations.
 
 ## Project Structure
 
-riskwise/
+Investing-Fear/
 │── frontend/
 │── backend/
 │── README.md
@@ -146,8 +144,8 @@ riskwise/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/ridhiambala87/riskwise.git
-cd riskwise
+git clone https://github.com/ridhiambala87/Investing-Fear.git
+cd Investing-Fear
 ```
 
 ### Install Dependencies
@@ -200,24 +198,24 @@ npm start
 
 * Reduces fear of investing
 * Improves financial literacy
-* Encourages smart financial decisions
+* Encourages confident decision-making
 
 ---
 
 ## Challenges
 
-* Accurate simulation modeling
+* Accurate risk simulation
 * Building trust in AI explanations
-* Simplifying complex financial concepts
+* Simplifying financial data
 
 ---
 
 ## Future Scope
 
 * Real-time stock market integration
-* Advanced AI risk prediction
-* Mobile application
-* Integration with trading platforms (Zerodha, Groww)
+* Advanced AI-based predictions
+* Mobile app development
+* Integration with platforms like Zerodha, Groww
 
 ---
 
