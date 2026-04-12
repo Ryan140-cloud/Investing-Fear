@@ -2,10 +2,8 @@
 let state = { equity: 50, gold: 20, bond: 30 };
 let myChart = null;
 
-// Format numbers to Indian Rupee style (e.g., ₹1,00,000)
 const fmt = (n) => "₹" + Math.round(n).toLocaleString('en-IN');
 
-// Update labels when sliders move
 document.getElementById('timeHorizon').addEventListener('input', function() {
     document.getElementById('horizonLabel').textContent = this.value + ' years';
     document.getElementById('horizonValue').textContent = this.value + 'Y';
@@ -22,17 +20,14 @@ function updateAllocation() {
     state.gold = parseInt(document.getElementById('goldSlider').value);
     state.bond = parseInt(document.getElementById('bondSlider').value);
     
-    // Sync text labels
     document.getElementById('eqLabel').textContent = state.equity + '%';
     document.getElementById('goldLabel').textContent = state.gold + '%';
     document.getElementById('bondLabel').textContent = state.bond + '%';
     
-    // Update the visual color bar
     document.getElementById('barEq').style.width = state.equity + '%';
     document.getElementById('barGold').style.width = state.gold + '%';
     document.getElementById('barBond').style.width = state.bond + '%';
 
-    // Remove active class from preset buttons if user manually slides
     document.querySelectorAll('.tab-pill').forEach(t => t.classList.remove('active'));
 }
 
@@ -51,7 +46,7 @@ function setPreset(name, btn) {
     btn.classList.add('active');
 }
 
-
+// ===== 3. CORE SIMULATION CALL (UPDATED FOR RENDER) =====
 async function runSimulation() {
     const btn = document.getElementById('runBtn');
     btn.innerHTML = '<i class="ph-bold ph-spinner"></i> Python Processing...';
@@ -68,7 +63,8 @@ async function runSimulation() {
     };
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/simulate', {
+        // FIXED: Removed http://127.0.0.1:5000 to use relative path for Render
+        const response = await fetch('/simulate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -80,26 +76,22 @@ async function runSimulation() {
             renderChart(data);
             updateUIStats(data);
 
-            // ===== ADDED: RISK METER UPDATE LOGIC =====
-            const lossProb = data.loss_prob; // Value from Python backend
+            const lossProb = data.loss_prob;
             const lossBar = document.getElementById('lossBar');
             const lossText = document.getElementById('lossText');
 
             if (lossBar && lossText) {
-                // Update the bar width and text
                 lossBar.style.width = lossProb + "%";
                 lossText.innerText = `Loss Probability: ${lossProb.toFixed(1)}%`;
 
-                // Update color based on risk level
                 if (lossProb > 20) {
-                    lossBar.style.backgroundColor = "#ff4d4d"; // Red for high risk
+                    lossBar.style.backgroundColor = "#ff4d4d"; 
                 } else if (lossProb > 10) {
-                    lossBar.style.backgroundColor = "#f1c40f"; // Yellow for medium
+                    lossBar.style.backgroundColor = "#f1c40f"; 
                 } else {
-                    lossBar.style.backgroundColor = "#2ecc71"; // Green for safe
+                    lossBar.style.backgroundColor = "#2ecc71"; 
                 }
             }
-            // ==========================================
             
             if (data.ai_advice) {
                 showAIMessage(data.ai_advice);
@@ -108,7 +100,7 @@ async function runSimulation() {
 
     } catch (error) {
         console.error("Connection failed:", error);
-        showAIMessage("Connection Error: Is the PyCharm server running?");
+        showAIMessage("Connection Error: Render is waking up, please try again in 30 seconds!");
     } finally {
         btn.innerHTML = '<i class="ph-bold ph-play"></i> Run Simulation';
         btn.disabled = false;
@@ -116,7 +108,6 @@ async function runSimulation() {
 }
 
 // ===== 4. CHART & STAT UPDATES =====
-// Replace your existing renderChart function with this:
 function renderChart(data) {
     const ctx = document.getElementById('mcChart').getContext('2d');
     const labels = Array.from({ length: data.median_path.length }, (_, i) => i % 12 === 0 ? `Y${i/12}` : '');
@@ -139,7 +130,7 @@ function renderChart(data) {
                 },
                 { 
                     label: 'Best Case (95th)', 
-                    data: data.upper_path, // Updated from best_path to upper_path
+                    data: data.upper_path, 
                     borderColor: '#10b981', 
                     borderDash: [5, 5], 
                     borderWidth: 1.5, 
@@ -148,7 +139,7 @@ function renderChart(data) {
                 },
                 { 
                     label: 'Worst Case (5th)', 
-                    data: data.lower_path, // Updated from worst_path to lower_path
+                    data: data.lower_path, 
                     borderColor: '#ef4444', 
                     borderDash: [5, 5], 
                     borderWidth: 1.5, 
@@ -172,14 +163,11 @@ function renderChart(data) {
     });
 }
 
-// Replace your existing updateUIStats function with this:
 function updateUIStats(data) {
-    // We use || 0 to prevent NaN if the value is missing
     document.getElementById('statBest').innerText = fmt(data.best || 0);
     document.getElementById('statMedian').innerText = fmt(data.median || 0);
     document.getElementById('statWorst').innerText = fmt(data.worst || 0);
     document.getElementById('statInvested').innerText = fmt(data.total_invested || 0);
-    
     document.getElementById('simCountText').innerText = document.getElementById('numSims').value;
 }
 
@@ -195,29 +183,8 @@ function showAIMessage(text) {
             <p>${text}</p>
         </div>
     `;
-    chat.prepend(msg); // Newest analysis (Live API data) goes to the top
+    chat.prepend(msg);
     chat.scrollTop = 0;
-}
-
-function askAI(topic) {
-    // We grab the values currently visible in your stat cards to make the manual buttons feel 'aware'
-    const medianWealth = document.getElementById('statMedian').innerText;
-    const invested = document.getElementById('statInvested').innerText;
-
-    const responses = {
-        risk: `With your current mix, we're projecting a median wealth of ${medianWealth}. Your risk is buffered by Gold and Bonds, but Equity drives that growth.`,
-        sip: `Your ${invested} total investment is being optimized by Rupee Cost Averaging. You're buying more units when the market dips!`,
-        crash: "Crashes are temporary. Even in the 'Worst Case' scenario shown on your chart, historical data shows that markets eventually trend upward.",
-        diversification: "By splitting your money between Nifty 50, Gold, and Bonds, you've ensured that a crash in one asset won't destroy your entire portfolio.",
-        beginner: "The math is clear: time in the market beats timing the market. Start your SIP today to hit that growth curve early."
-    };
-    
-    showAIMessage(responses[topic] || "How can I help you with your portfolio today?");
-}
-
-// Handles Enter key in the chat input
-function handleKeyPress(e) {
-    if (e.key === 'Enter') askCustomQuestion();
 }
 
 async function askCustomQuestion() {
@@ -225,7 +192,6 @@ async function askCustomQuestion() {
     const query = input.value.trim();
     if (!query) return;
 
-    // 1. Display the user's message in the chat
     input.value = '';
     const chat = document.getElementById('aiChat');
     const userMsg = document.createElement('div');
@@ -233,9 +199,9 @@ async function askCustomQuestion() {
     userMsg.innerHTML = `<div class="ai-bubble user"><p>${query}</p></div>`;
     chat.prepend(userMsg);
 
-    // 2. Request custom answer from Python Backend
     try {
-        const response = await fetch('http://127.0.0.1:5000/chat', {
+        // FIXED: Removed http://127.0.0.1:5000 for Render compatibility
+        const response = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -246,14 +212,4 @@ async function askCustomQuestion() {
                 median: document.getElementById('statMedian').innerText
             })
         });
-        const data = await response.json();
-        showAIMessage(data.answer); // Reuse existing helper to show AI response
-    } catch (error) {
-        showAIMessage("I'm having a bit of trouble thinking... is the backend server running?");
-    }
-}
-
-
-// Initialize on page load
-document.getElementById('runBtn').addEventListener('click', runSimulation);
-window.onload = runSimulation;
+        const data = await
