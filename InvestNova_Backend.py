@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template # Added render_template
 from flask_cors import CORS
 import numpy as np
 import yfinance as yf
@@ -7,14 +7,20 @@ import os
 from groq import Groq
 import scipy.stats as stats
 
-app = Flask(__name__)
+# We tell Flask that our static files are in the 'static' folder
+app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)
 
+# --- NEW HOME ROUTE ---
+@app.route('/')
+def index():
+    # This looks inside the 'templates' folder for index.html
+    return render_template('index.html')
+# ----------------------
+
 # 1. CONFIGURATION - SECURE VERSION
-# This pulls the key from the 'GROQ_API_KEY' variable you set up in Render
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
-
 ASSET_STDS = {"equity": 0.18, "gold": 0.12, "bond": 0.03}
 CORRELATIONS = {
     ("equity", "gold"): 0.10,
