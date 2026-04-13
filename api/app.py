@@ -10,8 +10,8 @@ import scipy.stats as stats
 # ✅ IMPORTANT: Correct paths for Vercel
 app = Flask(
     __name__,
-    template_folder="../templates",
-    static_folder="../static"
+    template_folder="../Templates",
+    static_folder="../Static"
 )
 CORS(app)
 
