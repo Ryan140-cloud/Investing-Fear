@@ -1,0 +1,16 @@
+
+{
+"version": 2,
+"builds": [
+{
+"src": "InvestNova_Backend.py",
+"use": "@vercel/python"
+}
+],
+"routes": [
+{
+"src": "/(.*)",
+"dest": "InvestNova_Backend.py"
+}
+]
+}
