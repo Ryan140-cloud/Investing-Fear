@@ -1,16 +1,16 @@
-# 🚀 InvestNova — Investing Without Fear 📈
+# InvestNova — Investing Without Fear 
 
 InvestNova is an AI-powered investment simulation platform designed to help beginners overcome the fear of market volatility. By combining Monte Carlo simulations with Generative AI (Llama 3.1), it enables users to visualize multiple possible investment outcomes and understand risk through data-driven insights rather than guesswork.
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
-🔗 https://invest-4lc4.vercel.app/
+https://invest-4lc4.vercel.app/
 
 ---
 
-## 🧠 Solution Overview
+## Solution Overview
 
 The primary barrier for new investors is **loss aversion** — the fear that market fluctuations may lead to significant losses.
 
@@ -27,9 +27,9 @@ InvestNova addresses this by:
 
 ---
 
-## 🛠️ Tech Stack & Technical Details
+## Tech Stack & Technical Details
 
-### 🎨 Frontend (User Interface)
+### Frontend (User Interface)
 
 * **Vanilla JavaScript (ES6+)** – Lightweight and fast DOM handling
 * **Chart.js** – Visualizes 200+ stochastic simulation paths
@@ -38,7 +38,7 @@ InvestNova addresses this by:
 
 ---
 
-### ⚙️ Backend (Simulation Engine)
+### Backend (Simulation Engine)
 
 * **Python Flask** – REST API handling frontend requests
 * **NumPy** – Vectorized computations for simulation
@@ -47,7 +47,7 @@ InvestNova addresses this by:
 
 ---
 
-### 🤖 Artificial Intelligence
+### Artificial Intelligence
 
 * **Model**: Llama 3.1 (8B)
 * **Inference Engine**: Groq LPU (ultra-fast responses)
@@ -57,7 +57,7 @@ Acts as a reasoning layer to convert statistical outputs into simple, human-frie
 
 ---
 
-### ☁️ Deployment
+### Deployment
 
 * **Platform**: Vercel
 * **Architecture**: Serverless Functions
@@ -65,7 +65,7 @@ Acts as a reasoning layer to convert statistical outputs into simple, human-frie
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Investing-Fear/
@@ -81,7 +81,7 @@ Investing-Fear/
 
 ---
 
-## 🧠 Core Mathematical Logic
+## Core Mathematical Logic
 
 The system uses a **Geometric Brownian Motion (GBM)** inspired model:
 
@@ -90,15 +90,15 @@ The system uses a **Geometric Brownian Motion (GBM)** inspired model:
 * Runs **200+ simulations** across time horizon
 * Uses **Normal CDF** to compute probability of loss
 
-👉 Final Output:
+Final Output:
 
-* 📉 Loss Probability Meter
-* 📈 Multiple simulated future paths
-* ⚖️ Risk vs Reward analysis
+* Loss Probability Meter
+* Multiple simulated future paths
+* Risk vs Reward analysis
 
 ---
 
-## ⚙️ Local Installation
+## Local Installation
 
 ### 1️⃣ Clone Repository
 
@@ -131,7 +131,7 @@ python InvestNova_Backend.py
 
 ---
 
-## 🌍 Impact
+## Impact
 
 * Builds confidence in beginner investors
 * Promotes financial literacy
@@ -140,7 +140,7 @@ python InvestNova_Backend.py
 
 ---
 
-## ⚠️ Challenges
+## Challenges
 
 * Accurate simulation of real-world markets
 * Ensuring trust in AI explanations
@@ -148,7 +148,7 @@ python InvestNova_Backend.py
 
 ---
 
-## 🔮 Future Scope
+## Future Scope
 
 * Real-time trading integration (Zerodha, Groww)
 * Advanced AI portfolio optimization
@@ -157,13 +157,13 @@ python InvestNova_Backend.py
 
 ---
 
-## 👥 Team: FinOrial
+## Team: FinOrial
 
 * **Ridhi Jain** – Team Lead & Solution Architect
 * **Ryan Sharma** – Lead Developer & AI/ML Integration
 
 ---
 
-## 💡 Final Note
+## Final Note
 
 > “InvestNova doesn’t just predict outcomes — it builds confidence.” 🚀
