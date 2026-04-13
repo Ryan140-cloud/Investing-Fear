@@ -15,13 +15,16 @@ app = Flask(
 )
 CORS(app)
 
+GROQ_API_KEY = "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"
+client = Groq(api_key=GROQ_API_KEY)
+
 # ---------------------- HOME ----------------------
 @app.route("/")
 def index():
     return render_template("index.html")
 
 # ---------------------- CONFIG ----------------------
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+# GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 ASSET_STDS = {"equity": 0.18, "gold": 0.12, "bond": 0.03}
