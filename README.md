@@ -166,4 +166,4 @@ python InvestNova_Backend.py
 
 ## Final Note
 
-> “InvestNova doesn’t just predict outcomes — it builds confidence.” 🚀
+> “InvestNova doesn’t just predict outcomes — it builds confidence.” 
